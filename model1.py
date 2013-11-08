@@ -35,7 +35,7 @@ class Model1(object):
 
 	    
 
-	def convertArgsToTokens(self, dic):
+	def convertArgsToTokens(self, data):
 		"""
 		this converts the readin lines from
 		sys to useable format, returns list
@@ -45,12 +45,12 @@ class Model1(object):
 		tdict  = []
 		tokens = []
 		
-		f = open(dic, 'r')
-		for line in f.readlines():
+		d = open(data, 'r')
+		for line in d.readlines():
 			tdict.append( line.rstrip() )
 			tokens +=  line.split()
 	      		  	
-	  	f.close() 
+	  	d.close() 
 	  	tokens = list( set(tokens) )    
 	  	# print "!!!!"
 	  	# print tokens
