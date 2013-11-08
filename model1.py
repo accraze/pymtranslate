@@ -24,7 +24,7 @@ class Model1(object):
 	    self.en_dict, self.en_words = self.convertArgsToTokens( self.data[2] )
 
 	    self.dev_in = open(self.data[3], 'r')
-	    self._dev_lines = self.dev_in.readlines()
+	    self.dev_lines = self.dev_in.readlines()
 	    self.dev_in.close()
 
 	    for index in range(len(self.en_dict)):
@@ -33,7 +33,17 @@ class Model1(object):
 	    # print "PAIRS:"
 	    # print self.sent_pairs
 
-	    
+	def printInfo(self):
+		for line in self.dev_lines:
+			self.dev_words += line.split()
+		#print self.dev_words
+		
+		print self.transmissions
+		# for word in self.dev_words:
+		# 	print "English Word:" + word
+		# 	print "German Words and Probabilities:"
+		# 	print self.transmissions[word]
+
 
 	def convertArgsToTokens(self, data):
 		"""
@@ -174,7 +184,7 @@ def main():
 	model1 = Model1(args)
 	model1.initTef()
 	model1.iterateEM(10)
-	model1._printInfo()
+	model1.printInfo()
 
 if __name__=="__main__":
   main()
