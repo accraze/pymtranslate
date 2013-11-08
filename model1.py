@@ -20,8 +20,9 @@ class Model1(object):
 	    self.data = data
 
 	    
-	    self.de_dict, self.de_words = self.convertArgsToTokens( self.data[1] )
-	    self.en_dict, self.en_words = self.convertArgsToTokens( self.data[2] )
+	    self.en_dict, self.en_words = self.convertArgsToTokens( self.data[1] )
+	    self.de_dict, self.de_words = self.convertArgsToTokens( self.data[2] )
+	    
 
 	    self.dev_in = open(self.data[3], 'r')
 	    self.dev_lines = self.dev_in.readlines()
@@ -38,11 +39,11 @@ class Model1(object):
 			self.dev_words += line.split()
 		#print self.dev_words
 		
-		print self.transmissions
-		# for word in self.dev_words:
-		# 	print "English Word:" + word
-		# 	print "German Words and Probabilities:"
-		# 	print self.transmissions[word]
+		#print self.transmissions
+		for word in self.dev_words:
+			print "English Word:" + word
+			print "German Words and Probabilities:"
+			print self.transmissions[word]
 
 
 	def convertArgsToTokens(self, data):
@@ -75,12 +76,12 @@ class Model1(object):
 		transmissions = {}
 
 		# go through each german word
-		for word in self.de_words:
+		for word in self.en_words:
 			word_poss = []
 			# if word in sentence.. then 
-			for sent in self.de_dict:
+			for sent in self.en_dict:
 				if word in sent:
-					matching = self.en_dict[ self.de_dict.index(sent)]
+					matching = self.de_dict[ self.en_dict.index(sent)]
 					word_poss = word_poss + matching.split()
 
 			#remove the duplicates 
@@ -90,7 +91,7 @@ class Model1(object):
 
 		self.probs = probs
 			
-		for word in self.de_words:
+		for word in self.en_words:
 			#print self.probs
 			word_probs = self.probs[word]
 			if (len(word_probs) == 0):
@@ -116,7 +117,7 @@ class Model1(object):
 			countef = {}
 			totalf  = {}
 			# set the count of the words to zero
-			for word in self.de_words:
+			for word in self.en_words:
 				
 				word_probs = self.probs[word]
 				
@@ -140,36 +141,40 @@ class Model1(object):
 				# print es_split
 				# print ds_split
 
-				for e in es_split:
-					self.totals[e] = 0
-					for d in ds_split:
-						#print self.transmissions
-						d_trans = self.transmissions[d]
+				for d in ds_split:
+					self.totals[d] = 0
+					for e in es_split:
 						
-						if (e not in d_trans):
-							continue
+						# print "TRANS"
+						# print self.transmissions[e]
+						
+						e_trans = self.transmissions[e]
+						
 
-						self.totals[e] += d_trans[e]
-						# print "!!!"
-						# print self.totals
+						# if (e not in d_trans):
+						# 	continue
 
-					for d in ds_split:
-						if (e not in self.transmissions[d]):
-							continue
-						self.countef[d][e] += self.transmissions[d][e] / self.totals[e]
-						self.totalf[d] += self.transmissions[d][e] / self.totals[e]
+						self.totals[d] += e_trans[d]
+						
+					# print "!!!"
+					# print self.totals
+					for e in es_split:
+						# if (e not in self.transmissions[d]):
+						# 	continue
+						self.countef[e][d] += self.transmissions[e][d] / self.totals[d]
+						self.totalf[e] += self.transmissions[e][d] / self.totals[d]
 						
 						# print "!!!"
 						# print self.countef
 				# print "!!!"
 				# print self.totalf
-			for d in self.de_words:
-				d_prob = self.probs[d]
+			for e in self.en_words:
+				e_prob = self.probs[e]
 				# print "!!!!"
 				# print d_prob
 				# print e
-				for e in d_prob:
-					self.transmissions[d][e] = self.countef[d][e]/self.totalf[d]
+				for d in e_prob:
+					self.transmissions[e][d] = self.countef[e][d]/self.totalf[e]
 
 
 def main():
@@ -177,7 +182,7 @@ def main():
 	args = sys.argv
 	if len(args) < 3:
 	 	print "--*INCORRECT FORMAT*--"
-	 	print "python model1.py <foreign corpus> <english corpus> <testfile>"
+	 	print "python model1.py <english corpus> <german corpus> <testfile>"
 	 	exit()
 
 	
