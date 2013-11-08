@@ -1,5 +1,4 @@
 import sys
-#import string
 
 class Model1(object):
 	
@@ -35,6 +34,27 @@ class Model1(object):
 	    # print self.sent_pairs
 
 	    
+
+	def convertArgsToTokens(self, dic):
+		"""
+		this converts the readin lines from
+		sys to useable format, returns list
+		of token and dict of tokens
+		"""
+
+		tdict  = []
+		tokens = []
+		
+		f = open(dic, 'r')
+		for line in f.readlines():
+			tdict.append( line.rstrip() )
+			tokens +=  line.split()
+	      		  	
+	  	f.close() 
+	  	tokens = list( set(tokens) )    
+	  	# print "!!!!"
+	  	# print tokens
+	  	return tdict, tokens
 
 
 
