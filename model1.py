@@ -14,10 +14,10 @@ class Model1(object):
 
 	    self.probs = {}
 	    self.transmissions = {} # this is t(e|f)
-	    self.countef = {}
+	    self.countef = {} # this countef
 	    self.totalf = {}
 	    self.totals = {}
-	    self.data = data
+	    self.data = data # this holds all the sysargs
 
 	    
 	    self.en_dict, self.en_words = self.convertArgsToTokens( self.data[1] )
@@ -37,13 +37,25 @@ class Model1(object):
 	def printInfo(self):
 		for line in self.dev_lines:
 			self.dev_words += line.split()
-		#print self.dev_words
 		
-		#print self.transmissions
+		print self.dev_words
+		
+
+		print self.transmissions['man']
 		for word in self.dev_words:
-			print "English Word:" + word
+			print"==================================="
+			print"==================================="
+			print "English Word: " + word
 			print "German Words & Probabilities:"
-			print self.transmissions[word]
+			if (word not in self.transmissions):
+				continue
+			trans = self.transmissions[word]
+			
+			print sorted( ((v,k)  for k,v in trans.iteritems() if v != 0), reverse=True)
+
+			# for k,v in trans.iteritems():
+			# 	if v != 0:
+			# 		print k + " : " + str(trans[k])
 
 
 	def convertArgsToTokens(self, data):
@@ -105,7 +117,7 @@ class Model1(object):
 				
 		self.transmissions = transmissions
 		# print "!!!!"
-		# print self.transmission['sitzung']
+		
 			
 
 	def iterateEM(self, count):
