@@ -13,7 +13,7 @@ class Model1(object):
 	    self.sent_pairs = []
 
 	    self.probs = {}
-	    self.transmissions = {}
+	    self.transmissions = {} # this is t(e|f)
 	    self.countef = {}
 	    self.totalf = {}
 	    self.totals = {}
@@ -42,7 +42,7 @@ class Model1(object):
 		#print self.transmissions
 		for word in self.dev_words:
 			print "English Word:" + word
-			print "German Words and Probabilities:"
+			print "German Words & Probabilities:"
 			print self.transmissions[word]
 
 
@@ -105,7 +105,7 @@ class Model1(object):
 				
 		self.transmissions = transmissions
 		# print "!!!!"
-		# print self.transmissions
+		# print self.transmission['sitzung']
 			
 
 	def iterateEM(self, count):
@@ -145,22 +145,29 @@ class Model1(object):
 					self.totals[d] = 0
 					for e in es_split:
 						
-						# print "TRANS"
+						# print "E"
+						# print e
+						# print "D"
+						# print d
 						# print self.transmissions[e]
 						
 						e_trans = self.transmissions[e]
 						
 
-						# if (e not in d_trans):
-						# 	continue
+						if (d not in e_trans):
+							continue
 
+						# print "!!!"
+						# print e_trans[d]
+						# print "!!!"
+						# print e_trans["sitzung"]
 						self.totals[d] += e_trans[d]
 						
 					# print "!!!"
 					# print self.totals
 					for e in es_split:
-						# if (e not in self.transmissions[d]):
-						# 	continue
+						if (d not in self.transmissions[e]):
+							continue
 						self.countef[e][d] += self.transmissions[e][d] / self.totals[d]
 						self.totalf[e] += self.transmissions[e][d] / self.totals[d]
 						
