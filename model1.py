@@ -4,7 +4,6 @@ class Model1(object):
 	
 	def __init__(self, data):
 	    
-
 	    self.de_words = []
 	    self.de_dict = []
 	    self.en_words = []
@@ -18,12 +17,10 @@ class Model1(object):
 	    self.totalf = {}
 	    self.totals = {}
 	    self.data = data # this holds all the sysargs
-
 	    
 	    self.en_dict, self.en_words = self.convertArgsToTokens( self.data[1] )
 	    self.de_dict, self.de_words = self.convertArgsToTokens( self.data[2] )
 	    
-
 	    self.dev_in = open(self.data[3], 'r')
 	    self.dev_lines = self.dev_in.readlines()
 	    self.dev_in.close()
@@ -31,16 +28,11 @@ class Model1(object):
 	    for index in range(len(self.en_dict)):
 	    	pair = (self.en_dict[index], self.de_dict[index])
 	    	self.sent_pairs.append(pair)
-	    # print "PAIRS:"
-	    # print self.sent_pairs
 
 	def printInfo(self):
 		for line in self.dev_lines:
 			self.dev_words += line.split()
 		
-		print self.dev_words
-		
-
 		print self.transmissions['man']
 		for word in self.dev_words:
 			print"==================================="
@@ -51,11 +43,8 @@ class Model1(object):
 				continue
 			trans = self.transmissions[word]
 			
-			print sorted( ((v,k)  for k,v in trans.iteritems() if v != 0), reverse=True)
-
-			# for k,v in trans.iteritems():
-			# 	if v != 0:
-			# 		print k + " : " + str(trans[k])
+			# print out a sorted list of all non-zero trans
+			print sorted( ((k,v)  for k,v in trans.iteritems() if v != 0), reverse=True)
 
 
 	def convertArgsToTokens(self, data):
@@ -112,16 +101,30 @@ class Model1(object):
 
 			word_probs = dict( [(w, uniform_prob) for w in word_probs] )
 			
-			#print word_probs
+			#save word_probs
 			transmissions[word] = word_probs 
 				
 		self.transmissions = transmissions
-		# print "!!!!"
 		
-			
-
 	def iterateEM(self, count):
 		
+		'''
+		 do until convergence
+		   set count(e|f) to 0 for all e,f
+		   set total(f) to 0 for all f
+		   for all sentence pairs (e_s,f_s)
+		     set total_s(e) = 0 for all e
+		     for all words e in e_s
+		       for all words f in f_s
+		         total_s(e) += t(e|f)
+		     for all words e in e_s
+		       for all words f in f_s
+		         count(e|f) += t(e|f) / total_s(e)
+		         total(f)   += t(e|f) / total_s(e)
+		   for all f
+		     for all e
+		       t(e|f) = count(e|f) / total(f)
+		'''
 
 		for iter in range(count):
 			print "ITERATION #("+str(iter + 1)+")\n"
@@ -140,58 +143,32 @@ class Model1(object):
 			self.countef = countef
 			
 			self.totalf = totalf
-
-			# print "!!!"
-			# print self.countef
-			 
 			
+			#NOW iterate over each word pair
 			for (es, ds) in self.sent_pairs:
 				es_split = es.split()
 				ds_split = ds.split()
-				
-				
-				# print es_split
-				# print ds_split
 
 				for d in ds_split:
 					self.totals[d] = 0
 					for e in es_split:
 						
-						# print "E"
-						# print e
-						# print "D"
-						# print d
-						# print self.transmissions[e]
-						
 						e_trans = self.transmissions[e]
-						
 
 						if (d not in e_trans):
 							continue
 
-						# print "!!!"
-						# print e_trans[d]
-						# print "!!!"
-						# print e_trans["sitzung"]
 						self.totals[d] += e_trans[d]
-						
-					# print "!!!"
-					# print self.totals
+					
+					#Get count(e|f) and total(f)	
 					for e in es_split:
 						if (d not in self.transmissions[e]):
 							continue
 						self.countef[e][d] += self.transmissions[e][d] / self.totals[d]
 						self.totalf[e] += self.transmissions[e][d] / self.totals[d]
 						
-						# print "!!!"
-						# print self.countef
-				# print "!!!"
-				# print self.totalf
 			for e in self.en_words:
 				e_prob = self.probs[e]
-				# print "!!!!"
-				# print d_prob
-				# print e
 				for d in e_prob:
 					self.transmissions[e][d] = self.countef[e][d]/self.totalf[e]
 
