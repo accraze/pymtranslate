@@ -33,13 +33,14 @@ class Model1(object):
 		for line in self.dev_lines:
 			self.dev_words += line.split()
 		
-		print self.transmissions['man']
+		#print self.transmissions['man']
 		for word in self.dev_words:
 			print"==================================="
 			print"==================================="
 			print "English Word: " + word
 			print "German Words & Probabilities:"
 			if (word not in self.transmissions):
+				print 'no matches found'
 				continue
 			trans = self.transmissions[word]
 			
@@ -64,8 +65,7 @@ class Model1(object):
 	      		  	
 	  	d.close() 
 	  	tokens = list( set(tokens) )    
-	  	# print "!!!!"
-	  	# print tokens
+
 	  	return tdict, tokens
 
 	def initTef(self):
@@ -127,7 +127,7 @@ class Model1(object):
 		'''
 
 		for iter in range(count):
-			print "ITERATION #("+str(iter + 1)+")\n"
+			#print "ITERATION #("+str(iter + 1)+")\n"
 
 			countef = {}
 			totalf  = {}
@@ -174,18 +174,18 @@ class Model1(object):
 
 
 def main():
-	print "WELCOME!"
+	print "Translating English words..."
 	args = sys.argv
-	if len(args) < 3:
+	if len(args) < 4:
 	 	print "--*INCORRECT FORMAT*--"
-	 	print "python model1.py <english corpus> <german corpus> <testfile>"
+	 	print "python model1.py <english corpus> <foreign corpus> <testfile>"
 	 	exit()
 
 	
-	model1 = Model1(args)
-	model1.initTef()
-	model1.iterateEM(10)
-	model1.printInfo()
+	model1 = Model1(args) # init class
+	model1.initTef()	  # init stat model
+	model1.iterateEM(10)  # run iterations
+	model1.printInfo()	  # print matches
 
 if __name__=="__main__":
   main()
