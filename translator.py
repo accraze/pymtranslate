@@ -1,6 +1,6 @@
 import sys
 
-class Model1(object):
+class Translator(object):
 	
 	def __init__(self, data):
 	    
@@ -38,7 +38,7 @@ class Model1(object):
 			print"==================================="
 			print"==================================="
 			print "English Word: " + word
-			print "German Words & Probabilities:"
+			print "Foreign Words & Probabilities:"
 			if (word not in self.transmissions):
 				print 'no matches found'
 				continue
@@ -109,6 +109,8 @@ class Model1(object):
 	def iterateEM(self, count):
 		
 		'''
+		Iterate through all transmissions of english to
+		foreign words. keep count of repeated occurences
 		 do until convergence
 		   set count(e|f) to 0 for all e,f
 		   set total(f) to 0 for all f
@@ -133,7 +135,9 @@ class Model1(object):
 			totalf  = {}
 			# set the count of the words to zero
 			for word in self.en_words:
-				
+				if(word not in self.probs):
+					continue
+
 				word_probs = self.probs[word]
 				
 				count = dict( [(w, 0) for w in word_probs] )
@@ -153,6 +157,9 @@ class Model1(object):
 					self.totals[d] = 0
 					for e in es_split:
 						
+						if (e not in self.transmissions):
+							continue
+
 						e_trans = self.transmissions[e]
 
 						if (d not in e_trans):
@@ -162,12 +169,16 @@ class Model1(object):
 					
 					#Get count(e|f) and total(f)	
 					for e in es_split:
+						if(e not in self.transmissions):
+							continue
 						if (d not in self.transmissions[e]):
 							continue
 						self.countef[e][d] += self.transmissions[e][d] / self.totals[d]
 						self.totalf[e] += self.transmissions[e][d] / self.totals[d]
 						
 			for e in self.en_words:
+				if (e not in self.probs):
+					continue
 				e_prob = self.probs[e]
 				for d in e_prob:
 					self.transmissions[e][d] = self.countef[e][d]/self.totalf[e]
@@ -178,14 +189,14 @@ def main():
 	args = sys.argv
 	if len(args) < 4:
 	 	print "--*INCORRECT FORMAT*--"
-	 	print "python model1.py <english corpus> <foreign corpus> <testfile>"
+	 	print "python translator.py <english corpus> <foreign corpus> <testfile>"
 	 	exit()
 
 	
-	model1 = Model1(args) # init class
-	model1.initTef()	  # init stat model
-	model1.iterateEM(10)  # run iterations
-	model1.printInfo()	  # print matches
+	translator = Translator(args) # init class
+	translator.initTef()	  # init stat model
+	translator.iterateEM(10)  # run iterations
+	translator.printInfo()	  # print matches
 
 if __name__=="__main__":
   main()
