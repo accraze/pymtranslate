@@ -5,7 +5,10 @@ A probabilistic foreign language translator. Based off the IBM model 1 machine t
 
 ###To run a quick demo:
 ```bash
-python model1.py data/short.en data/short.de data/devwords 
+$ git clone https://github.com/accraze/model1NLP.git
+$ cd model1NLP
+$ python model1.py data/short.en data/short.de data/devwords 
+
 ```
 
 
