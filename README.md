@@ -10,7 +10,8 @@ python model1.py data/short.en data/short.de data/devwords
 
 
 ##Useage:
-The script requires: 
+The script requires:
+ 
 1. An english corpus of text
 2. A matching foreign corpus of text
 3. A list of english words that you would like to translate. 
