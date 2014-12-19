@@ -9,7 +9,7 @@ A probabilistic foreign language translator. Based off the IBM model 1 machine t
 ```bash
 $ git clone https://github.com/accraze/model1NLP.git
 $ cd model1NLP
-$ python model1.py data/short.en data/short.de data/devwords 
+$ python translator.py data/short.en data/short.de data/devwords 
 
 ```
 
@@ -29,5 +29,4 @@ python model1.py <english corpus> <foreign corpus> <list of words to translate>
 There are various sized english/german corpus files in the data folder. Make sure you use the same sized files (i.e. 2kcorpus.en, 2kcorpus.de) otherwise your results will be skewed. Also remember, the larger the corpus you are trying to crunch, the more resources will be eaten up by your CPU. Machine Translation can be a RAM-intensive task, however you can often get more meaningful results with a larger corpus.
 
 
-This has been tested with Python2.7 on MacOSX.
 
