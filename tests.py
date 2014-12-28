@@ -15,16 +15,16 @@ class TestTranslationFunctions(unittest.TestCase):
 		t = Translator(['',english, foreign, wordList])
 		self.assertIn('the dog', t.en_dict)
 		self.assertIsNot(t.en_words, [])
-		self.assertIn('le chien', t.de_dict)
+		self.assertIn('der Hund', t.de_dict)
 		self.assertIsNot(t.de_words, [])
 
 	def test_tef_init(self):
 		t = Translator(['',english, foreign, wordList])
 		self.assertFalse(t.transmissions)# empty object
 		t.initTef()
-		self.assertEquals(t.transmissions, {'bus': {"l'": 0.5, 'autobus': 0.5}\
-			, 'the': {"l'": 0.2, 'chien': 0.2, 'le': 0.2, 'autobus': 0.2, 'chat': 0.2}, \
-			'dog': {'chien': 0.5, 'le': 0.5}, 'cat': {'le': 0.5, 'chat': 0.5}})# contains probable matches
+		self.assertEquals(t.transmissions, {'bus': {"der": 0.5, 'Bus': 0.5}\
+			, 'the': {"der": 0.2, 'Hund': 0.2, 'die': 0.2, 'Bus': 0.2, 'Katze': 0.2}, \
+			'dog': {'Hund': 0.5, 'der': 0.5}, 'cat': {'die': 0.5, 'Katze': 0.5}})# contains probabdie matches
 
 	def test_EM_transitions(self):
 		t = Translator(['',english, foreign, wordList])

@@ -1,4 +1,4 @@
-pymtranslate <img src="https://travis-ci.org/accraze/model1NLP.svg?branch=master"/>
+pymtranslate <img src="https://travis-ci.org/accraze/pymtranslate.svg?branch=master"/>
 ===========================
 A probabilistic foreign language translator. Based off the IBM model 1 machine translation algorithm. Uses 2 identical texts, an english corpus and a foreign corpus, then computes the probability that a specific english word maps to a specific foreign word based on our statistical model.
 
@@ -45,6 +45,7 @@ bus
 bill
 cat
 ```
+If you attempt to translate a word that is not in our statistical model, the script will tell you that no match was found:w
 
 ###Notes:
 There are various sized english/foreign corpus files provided in the data folder. Make sure you use the same sized files (i.e. 2kcorpus.en, 2kcorpus.de) otherwise your results will be skewed. Also remember, the larger the corpus you are trying to crunch, the more resources will be eaten up by your CPU. Machine Translation can be a RAM-intensive task, however you can often get more meaningful results with a larger corpus.
