@@ -1,14 +1,12 @@
-Model 1 Machine Translation
+pymtranslate <img src="https://travis-ci.org/accraze/model1NLP.svg?branch=master"/>
 ===========================
-<img src="https://travis-ci.org/accraze/model1NLP.svg?branch=master"/>
-
 A probabilistic foreign language translator. Based off the IBM model 1 machine translation algorithm. Uses 2 identical texts, an english corpus and a foreign corpus, then computes the probability that a specific english word maps to a specific foreign word based on our statistical model.
 
 
 ###To run a quick demo:
 ```bash
 $ git clone https://github.com/accraze/model1NLP.git
-$ cd model1NLP
+$ cd pymtranslate
 $ python translator.py data/short.en data/short.de data/devwords 
 
 ```
@@ -23,10 +21,33 @@ The script requires:
 
 To run the script use the following syntax:
 ```
-python model1.py <english corpus> <foreign corpus> <list of words to translate>
+python translator.py <english corpus> <foreign corpus> <list of words to translate>
+```
+###Example English Corpus
+```
+the dog
+the cat
+the bus
 ```
 
-There are various sized english/german corpus files in the data folder. Make sure you use the same sized files (i.e. 2kcorpus.en, 2kcorpus.de) otherwise your results will be skewed. Also remember, the larger the corpus you are trying to crunch, the more resources will be eaten up by your CPU. Machine Translation can be a RAM-intensive task, however you can often get more meaningful results with a larger corpus.
+###Example Foreign Corpus
+```
+le chien
+le chat
+l' autobus
+```
+
+###Example Translation words
+```
+dog
+man
+bus
+bill
+cat
+```
+
+###Notes:
+There are various sized english/german corpus files provided in the data folder. Make sure you use the same sized files (i.e. 2kcorpus.en, 2kcorpus.de) otherwise your results will be skewed. Also remember, the larger the corpus you are trying to crunch, the more resources will be eaten up by your CPU. Machine Translation can be a RAM-intensive task, however you can often get more meaningful results with a larger corpus.
 
 
 
