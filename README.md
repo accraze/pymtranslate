@@ -3,9 +3,9 @@ pymtranslate <img src="https://travis-ci.org/accraze/model1NLP.svg?branch=master
 A probabilistic foreign language translator. Based off the IBM model 1 machine translation algorithm. Uses 2 identical texts, an english corpus and a foreign corpus, then computes the probability that a specific english word maps to a specific foreign word based on our statistical model.
 
 
-###To run a quick demo:
+###Try it out:
 ```bash
-$ git clone https://github.com/accraze/model1NLP.git
+$ git clone https://github.com/accraze/pymtranslate.git 
 $ cd pymtranslate
 $ python translator.py data/short.en data/short.de data/devwords 
 
@@ -23,21 +23,21 @@ To run the script use the following syntax:
 ```
 python translator.py <english corpus> <foreign corpus> <list of words to translate>
 ```
-###Example English Corpus
+####Example English Corpus
 ```
 the dog
 the cat
 the bus
 ```
 
-###Example Foreign Corpus
+####Example Foreign Corpus
 ```
 le chien
 le chat
 l' autobus
 ```
 
-###Example Translation words
+####Example Translation words
 ```
 dog
 man
