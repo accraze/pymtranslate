@@ -47,7 +47,7 @@ cat
 ```
 
 ###Notes:
-There are various sized english/german corpus files provided in the data folder. Make sure you use the same sized files (i.e. 2kcorpus.en, 2kcorpus.de) otherwise your results will be skewed. Also remember, the larger the corpus you are trying to crunch, the more resources will be eaten up by your CPU. Machine Translation can be a RAM-intensive task, however you can often get more meaningful results with a larger corpus.
+There are various sized english/foreign corpus files provided in the data folder. Make sure you use the same sized files (i.e. 2kcorpus.en, 2kcorpus.de) otherwise your results will be skewed. Also remember, the larger the corpus you are trying to crunch, the more resources will be eaten up by your CPU. Machine Translation can be a RAM-intensive task, however you can often get more meaningful results with a larger corpus.
 
 
 
