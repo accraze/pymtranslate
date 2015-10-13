@@ -1,12 +1,22 @@
-pymtranslate <a href="https://travis-ci.org/accraze/pymtranslate" target="_blank"><img src="https://travis-ci.org/accraze/pymtranslate.svg?branch=master"/></a>
+pymtranslate <a href="https://pypi.python.org/pypi/pymtranslate" target="_blank"><img src="https://travis-ci.org/accraze/pymtranslate.svg?branch=master"/></a> <a href="https://travis-ci.org/accraze/pymtranslate" target="_blank"><img src="https://img.shields.io/pypi/v/pymtranslate.svg"/></a>
 ===========================
 A probabilistic foreign language translator. Based off the IBM model 1 machine translation algorithm. Uses 2 identical texts, an english corpus and a foreign corpus, then computes the probability that a specific english word maps to a specific foreign word based on our statistical model.
 
 
-###Try it out:
+### Install
 ```bash
 $ pip install pymtranslate
-....
+```
+
+##Useage:
+The script requires:
+ 
+1. An english corpus of text
+2. A matching foreign corpus of text
+3. A list of english words that you would like to translate.
+
+Then use translate:
+```
 $ python
 >>> from pymtranslate.translator import Translator
 >>>
@@ -21,18 +31,6 @@ $ python
 ....
 ```
 
-
-##Useage:
-The script requires:
- 
-1. An english corpus of text
-2. A matching foreign corpus of text
-3. A list of english words that you would like to translate. 
-
-To run the script use the following syntax:
-```
-python translator.py <english corpus> <foreign corpus> <list of words to translate>
-```
 ####Example English Corpus
 ```
 the dog
