@@ -3,7 +3,7 @@ import sys
 
 class Translator(object):
 
-    def __init__(self, data):
+    def __init__(self, english, foreign, dev):
 
         self.de_words = []
         self.de_dict = []
@@ -17,12 +17,11 @@ class Translator(object):
         self.countef = {}  # this countef
         self.totalf = {}
         self.totals = {}
-        self.data = data  # this holds all the sysargs
 
-        self.en_dict, self.en_words = self.convertArgsToTokens(self.data[1])
-        self.de_dict, self.de_words = self.convertArgsToTokens(self.data[2])
+        self.en_dict, self.en_words = self.convertArgsToTokens(english)
+        self.de_dict, self.de_words = self.convertArgsToTokens(foreign)
 
-        self.dev_in = open(self.data[3], 'r')
+        self.dev_in = open(dev, 'r')
         self.dev_lines = self.dev_in.readlines()
         self.dev_in.close()
 
@@ -91,7 +90,6 @@ class Translator(object):
             probs[word] = word_poss
 
         self.probs = probs
-        print 'PROBS!!!'
         print self.probs
 
         for word in self.en_words:
@@ -130,7 +128,6 @@ class Translator(object):
         '''
 
         for iter in range(count):
-            # print "ITERATION #("+str(iter + 1)+")\n"
 
             countef = {}
             totalf = {}

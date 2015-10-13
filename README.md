@@ -24,10 +24,20 @@ $ python
 >>> foreign = 'pymtranslate/data/short.de'
 >>> wordList = 'pymtranslate/data/devwords'
 >>>
->>> t = Translator(['', english, foreign, wordList])
->>> t.initTef()
->>> t.iterateEM(10)
->>> t.printInfo()
+>>> t = Translator(english, foreign, wordList)
+>>> t.initTef() # initialize transmissions
+>>> t.iterateEM(10) # get expected max estimates
+>>> t.printInfo() # print probable translations
+===================================
+English Word: dog
+Foreign Words & Probabilities:
+[('der', 0.1287760647333088), ('Hund', 0.8712239352666912)]
+===================================
+===================================
+English Word: man
+Foreign Words & Probabilities:
+no matches found
+===================================
 ....
 ```
 
