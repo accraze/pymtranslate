@@ -91,6 +91,8 @@ class Translator(object):
             probs[word] = word_poss
 
         self.probs = probs
+        print 'PROBS!!!'
+        print self.probs
 
         for word in self.en_words:
             # print self.probs

@@ -4,9 +4,9 @@ import sys
 # sys.path.append('..')
 from translator import Translator
 
-english = 'data/short.en'
-foreign = 'data/short.de'
-wordList = 'data/devwords'
+english = 'pymtranslate/data/short.en'
+foreign = 'pymtranslate/data/short.de'
+wordList = 'pymtranslate/data/devwords'
 
 
 class TestTranslationFunctions(unittest.TestCase):
