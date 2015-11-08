@@ -10,3 +10,5 @@ lib
 lib64
 *.pyo
 *.pyc
+MANIFEST
+

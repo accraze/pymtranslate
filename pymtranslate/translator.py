@@ -3,13 +3,12 @@ import sys
 
 class Translator(object):
 
-    def __init__(self, english, foreign, dev):
+    def __init__(self, english, foreign):
 
         self.de_words = []
         self.de_dict = []
         self.en_words = []
         self.en_dict = []
-        self.dev_words = []
         self.sent_pairs = []
 
         self.probs = {}
@@ -21,13 +20,22 @@ class Translator(object):
         self.en_dict, self.en_words = self.convertArgsToTokens(english)
         self.de_dict, self.de_words = self.convertArgsToTokens(foreign)
 
-        self.dev_in = open(dev, 'r')
-        self.dev_lines = self.dev_in.readlines()
-        self.dev_in.close()
-
         for index in range(len(self.en_dict)):
             pair = (self.en_dict[index], self.de_dict[index])
             self.sent_pairs.append(pair)
+
+    def translate(self, word):
+        """
+        pass in a word string that you
+        would like to see probable matches for.
+        """
+        if (word not in self.transmissions):
+            print 'no matches found'
+        else:
+            trans = self.transmissions[word]
+            # print out a sorted list of all non-zero trans
+            print sorted(((k, v) for k, v in trans.iteritems() if v != 0), 
+                                                                reverse=True)
 
     def printInfo(self):
         for line in self.dev_lines:
@@ -184,19 +192,3 @@ class Translator(object):
                     self.transmissions[e][d] = self.countef[
                         e][d] / self.totalf[e]
 
-
-def main():
-    print "Translating English words..."
-    args = sys.argv
-    if len(args) < 4:
-        print "--*INCORRECT FORMAT*--"
-        print "python translator.py <english corpus> <foreign corpus> <testfile>"
-        exit()
-
-    translator = Translator(args)  # init class
-    translator.initTef()	  # init stat model
-    translator.iterateEM(10)  # run iterations
-    translator.printInfo()	  # print matches
-
-if __name__ == "__main__":
-    main()

@@ -4,6 +4,7 @@ A probabilistic foreign language translator. Based off the IBM model 1 machine t
 
 
 ### Install
+Works for Python 2.7 (have not tested w/ Python 3)
 ```bash
 $ pip install pymtranslate
 ```
@@ -22,23 +23,16 @@ $ python
 >>>
 >>> english = 'pymtranslate/data/short.en'
 >>> foreign = 'pymtranslate/data/short.de'
->>> wordList = 'pymtranslate/data/devwords'
 >>>
->>> t = Translator(english, foreign, wordList)
+>>> t = Translator(english, foreign)
 >>> t.initTef() # initialize transmissions
 >>> t.iterateEM(10) # get expected max estimates
->>> t.printInfo() # print probable translations
-===================================
-English Word: dog
-Foreign Words & Probabilities:
+>>> t.translate('dog') # print probable translations
+
 [('der', 0.1287760647333088), ('Hund', 0.8712239352666912)]
-===================================
-===================================
-English Word: man
-Foreign Words & Probabilities:
+>>> t.translate('man') # print probable translations
 no matches found
-===================================
-....
+
 ```
 
 ####Example English Corpus
