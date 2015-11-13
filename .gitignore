@@ -11,4 +11,5 @@ lib64
 *.pyo
 *.pyc
 MANIFEST
-
+.coverage
+coverage.xml
