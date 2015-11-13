@@ -31,4 +31,3 @@ class TestTranslationFunctions(unittest.TestCase):
         t.initTef()
         t.iterateEM(10)
         self.assertTrue(t.transmissions)
-        # self.assertTrue(t.totalf)
