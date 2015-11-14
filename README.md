@@ -1,4 +1,4 @@
-pymtranslate <a href="https://travis-ci.org/accraze/pymtranslate" target="_blank"><img src="https://travis-ci.org/accraze/pymtranslate.svg?branch=master"/></a> <a href="https://pypi.python.org/pypi/pymtranslate" target="_blank"><img src="https://img.shields.io/pypi/v/pymtranslate.svg"/></a> [Codecov](https://img.shields.io/codecov/c/github/accraze/pymtranslate.svg)](https://codecov.io/github/accraze/pymtranslate)
+pymtranslate <a href="https://travis-ci.org/accraze/pymtranslate" target="_blank"><img src="https://travis-ci.org/accraze/pymtranslate.svg?branch=master"/></a> <a href="https://pypi.python.org/pypi/pymtranslate" target="_blank"><img src="https://img.shields.io/pypi/v/pymtranslate.svg"/></a> [![Codecov](https://img.shields.io/codecov/c/github/accraze/pymtranslate.svg)](https://codecov.io/github/accraze/pymtranslate)
 ===========================
 A probabilistic foreign language translator. Based off the IBM model 1 machine translation algorithm. Uses 2 identical texts, an english corpus and a foreign corpus, then computes the probability that a specific english word maps to a specific foreign word based on our statistical model.
 
