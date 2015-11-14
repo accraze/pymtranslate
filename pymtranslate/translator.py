@@ -30,30 +30,12 @@ class Translator(object):
         would like to see probable matches for.
         """
         if (word not in self.transmissions):
-            print 'no matches found'
+            raise NoMatchError('no matches found')
         else:
             trans = self.transmissions[word]
             # print out a sorted list of all non-zero trans
-            print sorted(((k, v) for k, v in trans.iteritems() if v != 0), 
+            return sorted(((k, v) for k, v in trans.iteritems() if v != 0), 
                                                                 reverse=True)
-
-    def printInfo(self):
-        for line in self.dev_lines:
-            self.dev_words += line.split()
-
-        # print self.transmissions['man']
-        for word in self.dev_words:
-            print"==================================="
-            print"==================================="
-            print "English Word: " + word
-            print "Foreign Words & Probabilities:"
-            if (word not in self.transmissions):
-                print 'no matches found'
-                continue
-            trans = self.transmissions[word]
-
-            # print out a sorted list of all non-zero trans
-            print sorted(((k, v) for k, v in trans.iteritems() if v != 0), reverse=True)
 
     def convertArgsToTokens(self, data):
         """
@@ -192,3 +174,8 @@ class Translator(object):
                     self.transmissions[e][d] = self.countef[
                         e][d] / self.totalf[e]
 
+class NoMatchError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
