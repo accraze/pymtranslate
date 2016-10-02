@@ -14,7 +14,6 @@ The script requires:
  
 1. An english corpus of text
 2. A matching foreign corpus of text
-3. A list of english words that you would like to translate.
 
 Then use translate:
 ```
@@ -49,14 +48,6 @@ le chat
 l' autobus
 ```
 
-####Example Translation words
-```
-dog
-man
-bus
-bill
-cat
-```
 If you attempt to translate a word that is not in our statistical model, the script will tell you that no match was found.
 
 ###Notes:
