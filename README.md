@@ -9,7 +9,7 @@ Works for Python 2.7 (have not tested w/ Python 3)
 $ pip install pymtranslate
 ```
 
-##Useage:
+##Usage:
 The script requires:
  
 1. An english corpus of text
