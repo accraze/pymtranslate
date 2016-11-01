@@ -3,7 +3,7 @@ import sys
 
 class Translator(object):
 
-    def __init__(self, english, foreign):
+    def __init__(self):
 
         self.de_words = []
         self.de_dict = []
@@ -17,12 +17,16 @@ class Translator(object):
         self.totalf = {}
         self.totals = {}
 
-        self.en_dict, self.en_words = self.convertArgsToTokens(english)
+    def train(self, english, foreign):
+    	self.en_dict, self.en_words = self.convertArgsToTokens(english)
         self.de_dict, self.de_words = self.convertArgsToTokens(foreign)
 
         for index in range(len(self.en_dict)):
             pair = (self.en_dict[index], self.de_dict[index])
             self.sent_pairs.append(pair)
+        
+        self.initTef()
+        self.iterateEM(10)
 
     def translate(self, word):
         """
