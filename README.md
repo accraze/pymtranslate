@@ -23,9 +23,9 @@ $ python
 >>> english = 'pymtranslate/data/short.en'
 >>> foreign = 'pymtranslate/data/short.de'
 >>>
->>> t = Translator(english, foreign)
->>> t.initTef() # initialize transmissions
->>> t.iterateEM(10) # get expected max estimates
+>>> t = Translator()
+>>> t.train(english, foreign) # initialize transmissions and get expected max estimates
+>>>
 >>> t.translate('dog') # print probable translations
 
 [('der', 0.1287760647333088), ('Hund', 0.8712239352666912)]
