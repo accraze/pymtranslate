@@ -18,7 +18,7 @@ class Translator(object):
         self.totals = {}
 
     def train(self, english, foreign):
-    	self.en_dict, self.en_words = self.convertArgsToTokens(english)
+        self.en_dict, self.en_words = self.convertArgsToTokens(english)
         self.de_dict, self.de_words = self.convertArgsToTokens(foreign)
 
         for index in range(len(self.en_dict)):
