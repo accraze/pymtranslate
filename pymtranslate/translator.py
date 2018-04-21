@@ -3,8 +3,7 @@ import sys
 
 class Translator(object):
 
-    def __init__(self):
-
+    def __init__(self, max_iterations=10):
         self.de_words = []
         self.de_dict = []
         self.en_words = []
@@ -16,6 +15,7 @@ class Translator(object):
         self.countef = {}  # this countef
         self.totalf = {}
         self.totals = {}
+        self.max_iterations = max_iterations
 
     def train(self, english, foreign):
         self.en_dict, self.en_words = self.convertArgsToTokens(english)
@@ -26,7 +26,7 @@ class Translator(object):
             self.sent_pairs.append(pair)
         
         self.initTef()
-        self.iterateEM(10)
+        self.iterateEM(self.max_iterations)
 
     def translate(self, word):
         """
